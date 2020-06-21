@@ -3,6 +3,12 @@ import React, { useContext, createContext, useReducer } from 'react';
 export interface State {
     manufacturers?: { name: string }[];
     colors?: string[];
+    filters: {
+        manufacturer: string;
+        color: string;
+        page?: number;
+        sort?: string;
+    }
 }
 
 export interface Action {
@@ -10,6 +16,12 @@ export interface Action {
     payload: {
         manufacturers?: { name: string }[],
         colors?: string[];
+        filters?: {
+            manufacturer: string;
+            color: string;
+            page?: number;
+            sort?: string;
+        };
     }
 }
 
@@ -33,6 +45,12 @@ const reducer = (state: State, action: Action) => {
 const initialState = {
     manufacturers: [],
     colors: [],
+    filters: {
+        page: 1,
+        sort: 'asc',
+        manufacturer: '',
+        color: '',
+    },
 };
 
 const ContextProvider: React.FC<ProviderProps> = ({ children }) => {

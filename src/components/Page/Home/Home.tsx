@@ -1,16 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 import Filter from '../../Filter';
 
+const HomePageWrapper = styled(Grid)`
+    && {
+        margin: 0;
+    }
+`;
+
 const Home: React.FC = () => (
-    <Grid container spacing={3} justify="space-between">
-        <Grid item>
-            <Typography variant="h5">Homepage</Typography>
+    <HomePageWrapper container spacing={6} justify="space-between">
+        <Grid item md={4}>
             <Filter />
         </Grid>
-    </Grid>
+    </HomePageWrapper>
 );
 
 export default Home;
