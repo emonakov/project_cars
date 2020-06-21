@@ -18,10 +18,14 @@ const LinkTo = styled(LinkToUnstyled)`
 
 const Title = styled(Typography)`
     && {
-        text-transform: uppercase;
         font-size: 32px;
         font-weight: 700;
     }
+`;
+
+const TitleLink = styled(LinkTo)`
+    text-transform: uppercase;
+    font-size: inherit;
 `;
 
 const Container = styled(ContainerUnstyled)`
@@ -32,7 +36,9 @@ const Header: React.FC = () => (
     <Container>
         <WrappingGrid container spacing={3} justify="space-between" alignItems="center">
             <Grid item md={4}>
-                <Title variant="h1">Car Sales</Title>
+                <Title variant="h1">
+                    <TitleLink to="/">Car Sales</TitleLink>
+                </Title>
             </Grid>
             <Grid item md={4}>
                 <Grid container spacing={3} justify="flex-end">
