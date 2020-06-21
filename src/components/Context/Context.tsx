@@ -1,11 +1,11 @@
 import React, { useContext, createContext, useReducer } from 'react';
 
-interface State {
+export interface State {
     manufacturers?: { name: string }[];
     colors?: string[];
 }
 
-interface Action {
+export interface Action {
     type: string;
     payload: {
         manufacturers?: { name: string }[],
@@ -13,8 +13,8 @@ interface Action {
     }
 }
 
-type Dispatch = (action: Action) => void
-type ProviderProps = {children: React.ReactNode}
+export type Dispatch = (action: Action) => void
+export type ProviderProps = {children: React.ReactNode}
 
 const StateContext = createContext<State | undefined>(undefined);
 const DispatchContext = createContext<Dispatch | undefined>(
@@ -23,8 +23,7 @@ const DispatchContext = createContext<Dispatch | undefined>(
 
 const reducer = (state: State, action: Action) => {
     switch (action.type) {
-        case 'manufacturers':
-        case 'colors':
+        case 'update':
             return { ...state, ...action.payload };
         default:
             return state;

@@ -30,6 +30,8 @@ module.exports = {
         'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
         'import/extensions': 'off',
         'react/jsx-props-no-spreading': 'off',
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
     },
     settings: {
         react: {
