@@ -17,6 +17,7 @@ const theme: DefaultTheme = {
     grid,
     buttonColor: '#768954',
     textColor: '#4a4a4a',
+    borderColor: '#ededed',
 };
 
 export default theme;
