@@ -3,11 +3,13 @@ import React, { useContext, createContext, useReducer } from 'react';
 export interface State {
     manufacturers?: { name: string }[];
     colors?: string[];
+    cars?: any[];
+    totalCarsCount?: number;
+    totalPageCount?: number;
     filters: {
         manufacturer: string;
         color: string;
-        page?: number;
-        sort?: string;
+        [key: string]: string | number;
     }
 }
 
@@ -16,11 +18,13 @@ export interface Action {
     payload: {
         manufacturers?: { name: string }[],
         colors?: string[];
+        cars?: any[];
+        totalCarsCount?: number;
+        totalPageCount?: number;
         filters?: {
             manufacturer: string;
             color: string;
-            page?: number;
-            sort?: string;
+            [key: string]: string | number;
         };
     }
 }
