@@ -33,22 +33,24 @@ const Container = styled(ContainerUnstyled)`
 `;
 
 const Header: React.FC = () => (
-    <Container>
-        <WrappingGrid container spacing={3} justify="space-between" alignItems="center">
-            <Grid item md={4}>
-                <Title variant="h1">
-                    <TitleLink to="/">Car Sales</TitleLink>
-                </Title>
-            </Grid>
-            <Grid item md={4}>
-                <Grid container spacing={3} justify="flex-end">
-                    <LinkTo to="/">Purchase</LinkTo>
-                    <LinkTo to="/">My orders</LinkTo>
-                    <LinkTo to="/">Sell</LinkTo>
+    <header>
+        <Container>
+            <WrappingGrid container spacing={3} justify="space-between" alignItems="center">
+                <Grid item md={4}>
+                    <Title variant="h1">
+                        <TitleLink to="/">Car Sales</TitleLink>
+                    </Title>
                 </Grid>
-            </Grid>
-        </WrappingGrid>
-    </Container>
+                <Grid item md={4}>
+                    <Grid container spacing={3} justify="flex-end">
+                        <LinkTo to="/">Purchase</LinkTo>
+                        <LinkTo to="/">My orders</LinkTo>
+                        <LinkTo to="/">Sell</LinkTo>
+                    </Grid>
+                </Grid>
+            </WrappingGrid>
+        </Container>
+    </header>
 );
 
 export default Header;

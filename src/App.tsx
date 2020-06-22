@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ContextProvider from './components/Context';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Fallback from './components/Fallback';
 import theme from './config/theme';
 
@@ -21,6 +22,7 @@ const App: React.FC = () => (
                         <Route path="/car/:stockId(\d+)" exact component={CarDetails} />
                     </Switch>
                 </ContextProvider>
+                <Footer />
             </Suspense>
         </Router>
     </ThemeProvider>
