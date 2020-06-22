@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Paper from '@material-ui/core/Paper';
 import Pagination from '@material-ui/lab/Pagination';
 
-import LinkToUnstyled from '../shared/LinkTo';
+import CarDescription from '../shared/CarDescription';
 import { useContextState, useContextDispatch } from '../Context';
 import { fetchCarsWithFilters } from '../../services/filterService';
+import { CarInterface } from '../../interfaces/CarInterface';
 
 const CarContent = styled(CardContent)`
     display: grid;
@@ -17,7 +17,7 @@ const CarContent = styled(CardContent)`
     grid-template-columns: 100px 1fr;
 `;
 
-const CarDescription = styled(CardContent)`
+const CarDescriptionWrapper = styled(CardContent)`
     && {
         padding: 0;
 
@@ -49,23 +49,6 @@ const Cars = styled(Card)`
     border: 1px solid ${({ theme }) => theme.borderColor};
 `;
 
-const LinkTo = styled(LinkToUnstyled)`
-    color: ${({ theme }) => theme.primaryColor};
-
-    &:active,
-    &:hover {
-        color: ${({ theme }) => theme.secondaryColor};
-    }
-`;
-
-const UpperCase = styled.span`
-    text-transform: uppercase;
-`;
-
-const Capitalized = styled.span`
-    text-transform: capitalize;
-`;
-
 const CarList: React.FC = () => {
     const {
         filters,
@@ -90,7 +73,7 @@ const CarList: React.FC = () => {
     useEffect(() => {
         fetchCarsWithFilters(
             ({ cars: newCars, totalCarsCount, totalPageCount }: {
-                cars: any,
+                cars: CarInterface[],
                 totalCarsCount: number,
                 totalPageCount: number,
             }) => dispatch({
@@ -121,19 +104,14 @@ const CarList: React.FC = () => {
                                         <CarPhoto src={car.pictureUrl} alt={car.modelName} />
                                     )
                                     : <ImagePlaceholder />}
-                                <CarDescription>
-                                    <Typography variant="h6" gutterBottom>{car.modelName}</Typography>
-                                    <Typography variant="caption" display="block" gutterBottom>
-                                        {`Stock # ${car.stockNumber}`}
-                                        <UpperCase>
-                                            {` - ${car.mileage.number.toLocaleString()} ${car.mileage.unit}`}
-                                        </UpperCase>
-                                        <Capitalized>{` - ${car.fuelType} - ${car.color}`}</Capitalized>
-                                        <CardActions>
-                                            <LinkTo to={`/car/${car.stockNumber}`}>View details</LinkTo>
-                                        </CardActions>
-                                    </Typography>
-                                </CarDescription>
+                                <CarDescriptionWrapper>
+                                    <CarDescription
+                                        car={car}
+                                        headerType="h6"
+                                        descriptionType="caption"
+                                        showLink
+                                    />
+                                </CarDescriptionWrapper>
                             </CarContent>
                         </Cars>
                     ))}

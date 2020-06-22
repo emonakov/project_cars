@@ -1,12 +1,32 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import Container from '@material-ui/core/Container';
 
-const CarDetails: React.FC = () => {
-    const params = useParams<{stockId?: string}>();
+import Car from '../../Car';
+import ErrorBoundary from '../../ErrorBoundary';
+import FullPageContainerUnstyled from '../../shared/FullPageContainer';
 
-    return (
-        <h1>{params.stockId}</h1>
-    );
-};
+const FullPageContainer = styled(FullPageContainerUnstyled)`
+    && { padding: 0 }
+`;
+
+const BannerPlaceholder = styled.section`
+    width: 100%;
+    height: ${({ theme }) => theme.grid(80)};
+    background: ${({ theme }) => theme.borderColor};
+`;
+
+const CarDetails: React.FC = () => (
+    <>
+        <FullPageContainer>
+            <BannerPlaceholder />
+        </FullPageContainer>
+        <ErrorBoundary>
+            <Container>
+                <Car />
+            </Container>
+        </ErrorBoundary>
+    </>
+);
 
 export default CarDetails;

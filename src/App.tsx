@@ -18,7 +18,7 @@ const App: React.FC = () => (
                 <ContextProvider>
                     <Switch>
                         <Route path="/" exact component={Home} />
-                        <Route path="/car/:stockId" exact component={CarDetails} />
+                        <Route path="/car/:stockId(\d+)" exact component={CarDetails} />
                     </Switch>
                 </ContextProvider>
             </Suspense>

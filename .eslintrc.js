@@ -32,6 +32,7 @@ module.exports = {
         'react/jsx-props-no-spreading': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        'react/state-in-constructor': 'off',
     },
     settings: {
         react: {
