@@ -6,7 +6,7 @@ import FormControlUnstyled from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const FormControl = styled(FormControlUnstyled)`
-    width: ${({ theme }) => theme.grid(48)};
+    width: 100%;
 `;
 
 interface FormElementProps {

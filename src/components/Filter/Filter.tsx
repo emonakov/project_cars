@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ContainerUnstyled from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 import FilterElement from '../shared/FilterElement';
 import { useContextState, useContextDispatch } from '../Context';
@@ -14,23 +15,34 @@ const Container = styled(ContainerUnstyled)`
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        height: ${({ theme }) => theme.grid(40)};
+        height: ${({ theme }) => theme.grid(50)};
     }
 `;
 
 const Filter: React.FC = () => {
+    const [localFilter, setLocalFilter] = useState({
+        manufacturer: '',
+        color: '',
+    });
     const { manufacturers, colors, filters } = useContextState();
     const dispatch = useContextDispatch();
 
-    const updateFilter = (type: string, value: string|number) => {
+    const updateFilter = () => {
         dispatch({
             type: 'update',
             payload: {
                 filters: {
                     ...filters,
-                    [type]: value,
+                    ...localFilter,
                 },
             },
+        });
+    };
+
+    const updateLocalFilter = (type: string, value: string) => {
+        setLocalFilter({
+            ...localFilter,
+            [type]: value,
         });
     };
 
@@ -38,14 +50,18 @@ const Filter: React.FC = () => {
         fetchFilters((data: any) => dispatch({ type: 'update', payload: { ...data } }));
     }, [dispatch]);
 
+    useEffect(() => {
+        setLocalFilter({ ...filters });
+    }, [filters]);
+
     return (
         <Container>
             {manufacturers && (
                 <FilterElement
                     title="Manufacturers"
                     type="manufacturer"
-                    defaultValue={filters.manufacturer}
-                    onChange={updateFilter}
+                    defaultValue={localFilter.manufacturer}
+                    onChange={updateLocalFilter}
                     values={manufacturers.map(({ name }) => name)}
                 />
             )}
@@ -53,10 +69,15 @@ const Filter: React.FC = () => {
                 <FilterElement
                     title="Colors"
                     type="color"
-                    defaultValue={filters.color}
-                    onChange={updateFilter}
+                    defaultValue={localFilter.color}
+                    onChange={updateLocalFilter}
                     values={colors}
                 />
+            )}
+            {(colors || manufacturers) && (
+                <Button variant="contained" color="primary" onClick={updateFilter}>
+                    Filter
+                </Button>
             )}
         </Container>
     );
