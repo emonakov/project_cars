@@ -14,7 +14,7 @@ interface FormElementProps {
     type: string;
     defaultValue: string | number;
     onChange: Function;
-    values: string[];
+    values: any[];
 }
 
 const FilterElement: React.FC<FormElementProps> = ({
@@ -33,9 +33,20 @@ const FilterElement: React.FC<FormElementProps> = ({
             <MenuItem value="">
                 <em>None</em>
             </MenuItem>
-            {values.map((value: string) => (
-                <MenuItem key={value} value={value}>{value}</MenuItem>
-            ))}
+            {values.map((value: string | [string, string]) => {
+                let val = '';
+                let name = '';
+
+                if (Array.isArray(value)) {
+                    [name, val] = value;
+                } else {
+                    [name, val] = [value, value];
+                }
+
+                return (
+                    <MenuItem key={val} value={val}>{name}</MenuItem>
+                );
+            })}
         </Select>
     </FormControl>
 );

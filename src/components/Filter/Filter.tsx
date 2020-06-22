@@ -15,7 +15,7 @@ const Container = styled(ContainerUnstyled)`
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        height: ${({ theme }) => theme.grid(50)};
+        height: ${({ theme }) => theme.grid(60)};
     }
 `;
 
@@ -39,6 +39,7 @@ const Filter: React.FC = () => {
         manufacturer: '',
         color: '',
         page: 1,
+        sort: 'asc',
     });
 
     const updateFilter = () => {
@@ -84,11 +85,19 @@ const Filter: React.FC = () => {
                     values={colors}
                 />
             )}
-            {(colors || manufacturers) && (
-                <OrangeButton variant="contained" color="primary" onClick={updateFilter}>
-                    Filter
-                </OrangeButton>
-            )}
+            <FilterElement
+                title="Sort"
+                type="sort"
+                defaultValue={localFilter.sort}
+                onChange={updateLocalFilter}
+                values={[
+                    ['Mileage - Ascending', 'asc'],
+                    ['Mileage - Descending', 'des'],
+                ]}
+            />
+            <OrangeButton variant="contained" color="primary" onClick={updateFilter}>
+                Filter
+            </OrangeButton>
         </Container>
     );
 };
