@@ -34,7 +34,14 @@ const CarDescription = styled(CardContent)`
 const ImagePlaceholder = styled(Paper)`
     width: ${({ theme }) => theme.grid(14)};
     height: ${({ theme }) => theme.grid(14)};
+    display: flex;
+    justify-content: center;
+    align-items: center;
     && { background: ${({ theme }) => theme.borderColor}; }
+`;
+
+const CarPhoto = styled.img`
+    max-width: 100%;
 `;
 
 const Cars = styled(Card)`
@@ -109,7 +116,11 @@ const CarList: React.FC = () => {
                     {cars.map((car) => (
                         <Cars key={car.stockNumber} elevation={0}>
                             <CarContent>
-                                <ImagePlaceholder />
+                                {car.pictureUrl
+                                    ? (
+                                        <CarPhoto src={car.pictureUrl} alt={car.modelName} />
+                                    )
+                                    : <ImagePlaceholder />}
                                 <CarDescription>
                                     <Typography variant="h6" gutterBottom>{car.modelName}</Typography>
                                     <Typography variant="caption" display="block" gutterBottom>

@@ -8,6 +8,7 @@ import Fallback from './components/Fallback';
 import theme from './config/theme';
 
 const Home = lazy(() => import('./components/Page/Home'));
+const CarDetails = lazy(() => import('./components/Page/CarDetails'));
 
 const App: React.FC = () => (
     <ThemeProvider theme={theme}>
@@ -17,6 +18,7 @@ const App: React.FC = () => (
                 <ContextProvider>
                     <Switch>
                         <Route path="/" exact component={Home} />
+                        <Route path="/car/:stockId" exact component={CarDetails} />
                     </Switch>
                 </ContextProvider>
             </Suspense>
