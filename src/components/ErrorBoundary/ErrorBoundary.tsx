@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
 class ErrorBoundary extends React.Component {
     state: { hasError: boolean } = {
@@ -18,7 +19,7 @@ class ErrorBoundary extends React.Component {
         // You can render any custom fallback UI
             return (
                 <Container>
-                    <h1>Something went wrong.</h1>
+                    <Typography variant="h4">Something went wrong.</Typography>
                 </Container>
             );
         }

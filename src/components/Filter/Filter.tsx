@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ContainerUnstyled from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 
 import FilterElement from '../shared/FilterElement';
+import OrangeButton from '../shared/OrangeButton';
 import { useContextState, useContextDispatch } from '../Context';
 import { fetchFilters } from '../../services/filterService';
 
@@ -16,19 +16,6 @@ const Container = styled(ContainerUnstyled)`
         flex-direction: column;
         justify-content: space-around;
         height: ${({ theme }) => theme.grid(60)};
-    }
-`;
-
-const OrangeButton = styled(Button)`
-    && {
-        background-color: ${({ theme }) => theme.primaryColor};
-        width: 128px;
-        align-self: flex-end;
-        height: 32px;
-
-        &:hover {
-            background-color: ${({ theme }) => theme.secondaryColor};
-        }
     }
 `;
 
