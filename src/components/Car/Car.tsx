@@ -9,6 +9,7 @@ import OrangeButton from '../shared/OrangeButton';
 
 import { fetchCar } from '../../services/carService';
 import { CarInterface } from '../../interfaces/CarInterface';
+import { saveFavCar, isFavCar, removeFavCar } from '../../utils/storage';
 
 const CarDetailsWrapper = styled.section`
     display: grid;
@@ -32,6 +33,19 @@ const CarDetails: React.FC = () => {
     const { stockId } = useParams<{stockId: string}>();
     const [car, setCar] = useState<CarInterface>();
     const [error, setHasError] = useState<Error>();
+    const [savedFav, setSavedFav] = useState<Boolean>();
+
+    const favCar = () => {
+        if (car) {
+            if (!savedFav) {
+                saveFavCar(car);
+                setSavedFav(true);
+            } else {
+                removeFavCar(car);
+                setSavedFav(false);
+            }
+        }
+    };
 
     useEffect(() => {
         fetchCar((carDetails: CarInterface, err: Error) => {
@@ -42,6 +56,12 @@ const CarDetails: React.FC = () => {
             }
         }, stockId);
     }, [stockId]);
+
+    useEffect(() => {
+        if (car && isFavCar(car)) {
+            setSavedFav(true);
+        }
+    }, [car]);
 
     useEffect(() => {
         if (error) {
@@ -72,8 +92,12 @@ const CarDetails: React.FC = () => {
                             save it in your collection of favorite
                             items.
                         </Typography>
-                        <OrangeButton variant="contained" color="primary">
-                            Save
+                        <OrangeButton
+                            variant="contained"
+                            color="primary"
+                            onClick={favCar}
+                        >
+                            {savedFav ? 'Remove' : 'Save'}
                         </OrangeButton>
                     </FavWrapper>
                 </CardContent>

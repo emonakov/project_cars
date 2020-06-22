@@ -43,7 +43,7 @@ const Header: React.FC = () => (
                 </Grid>
                 <Grid item md={4}>
                     <Grid container spacing={3} justify="flex-end">
-                        <LinkTo to="/">Purchase</LinkTo>
+                        <LinkTo to="/car/fav">Favorites</LinkTo>
                         <LinkTo to="/">My orders</LinkTo>
                         <LinkTo to="/">Sell</LinkTo>
                     </Grid>
