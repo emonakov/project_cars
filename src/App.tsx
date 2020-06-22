@@ -11,6 +11,7 @@ import theme from './config/theme';
 const Home = lazy(() => import('./components/Page/Home'));
 const CarDetails = lazy(() => import('./components/Page/CarDetails'));
 const FavCars = lazy(() => import('./components/Page/FavCars'));
+const NotFound = lazy(() => import('./components/Page/NotFound'));
 
 const App: React.FC = () => (
     <ThemeProvider theme={theme}>
@@ -22,6 +23,7 @@ const App: React.FC = () => (
                         <Route path="/" exact component={Home} />
                         <Route path="/car/fav" exact component={FavCars} />
                         <Route path="/car/:stockId(\d+)" exact component={CarDetails} />
+                        <Route component={NotFound} />
                     </Switch>
                 </ContextProvider>
                 <Footer />

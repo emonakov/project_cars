@@ -18,6 +18,10 @@ const CarDetailsWrapper = styled.section`
     justify-content: center;
 `;
 
+const FavContent = styled(CardContent)`
+    justify-self: end;
+`;
+
 const FavWrapper = styled.section`
     display: flex;
     flex-direction: column;
@@ -29,7 +33,7 @@ const FavWrapper = styled.section`
     padding: ${({ theme }) => theme.g3};
 `;
 
-const CarDetails: React.FC = () => {
+const Car: React.FC = () => {
     const { stockId } = useParams<{stockId: string}>();
     const [car, setCar] = useState<CarInterface>();
     const [error, setHasError] = useState<Error>();
@@ -85,7 +89,7 @@ const CarDetails: React.FC = () => {
                         conditions
                     </Typography>
                 </CardContent>
-                <CardContent>
+                <FavContent>
                     <FavWrapper>
                         <Typography variant="caption">
                             If you like this car, click the button and
@@ -100,10 +104,10 @@ const CarDetails: React.FC = () => {
                             {savedFav ? 'Remove' : 'Save'}
                         </OrangeButton>
                     </FavWrapper>
-                </CardContent>
+                </FavContent>
             </CarDetailsWrapper>
         )
         : null;
 };
 
-export default CarDetails;
+export default Car;

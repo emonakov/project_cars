@@ -1,6 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+
+const Wrapper = styled(Container)`
+    && {
+        display: flex;
+        justify-content: center;
+        padding: 60px;
+    }
+
+    .MuiTypography-root {
+        color: ${({ theme }) => theme.primaryColor};
+    }
+`;
 
 class ErrorBoundary extends React.Component {
     state: { hasError: boolean } = {
@@ -18,9 +31,9 @@ class ErrorBoundary extends React.Component {
         if (hasError) {
         // You can render any custom fallback UI
             return (
-                <Container>
+                <Wrapper>
                     <Typography variant="h4">Something went wrong.</Typography>
-                </Container>
+                </Wrapper>
             );
         }
 
