@@ -18,6 +18,8 @@ const theme: DefaultTheme = {
     buttonColor: '#768954',
     textColor: '#4a4a4a',
     borderColor: '#ededed',
+    primaryColor: '#ea7f28',
+    secondaryColor: '#d37324',
 };
 
 export default theme;

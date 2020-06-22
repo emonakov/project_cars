@@ -9,6 +9,7 @@ export interface State {
     filters: {
         manufacturer: string;
         color: string;
+        page: number;
         [key: string]: string | number;
     }
 }
@@ -24,6 +25,7 @@ export interface Action {
         filters?: {
             manufacturer: string;
             color: string;
+            page: number;
             [key: string]: string | number;
         };
     }

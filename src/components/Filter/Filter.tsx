@@ -19,13 +19,27 @@ const Container = styled(ContainerUnstyled)`
     }
 `;
 
+const OrangeButton = styled(Button)`
+    && {
+        background-color: ${({ theme }) => theme.primaryColor};
+        width: 128px;
+        align-self: flex-end;
+        height: 32px;
+
+        &:hover {
+            background-color: ${({ theme }) => theme.secondaryColor};
+        }
+    }
+`;
+
 const Filter: React.FC = () => {
+    const { manufacturers, colors, filters } = useContextState();
+    const dispatch = useContextDispatch();
     const [localFilter, setLocalFilter] = useState({
         manufacturer: '',
         color: '',
+        page: 1,
     });
-    const { manufacturers, colors, filters } = useContextState();
-    const dispatch = useContextDispatch();
 
     const updateFilter = () => {
         dispatch({
@@ -50,10 +64,6 @@ const Filter: React.FC = () => {
         fetchFilters((data: any) => dispatch({ type: 'update', payload: { ...data } }));
     }, [dispatch]);
 
-    useEffect(() => {
-        setLocalFilter({ ...filters });
-    }, [filters]);
-
     return (
         <Container>
             {manufacturers && (
@@ -75,9 +85,9 @@ const Filter: React.FC = () => {
                 />
             )}
             {(colors || manufacturers) && (
-                <Button variant="contained" color="primary" onClick={updateFilter}>
+                <OrangeButton variant="contained" color="primary" onClick={updateFilter}>
                     Filter
-                </Button>
+                </OrangeButton>
             )}
         </Container>
     );
