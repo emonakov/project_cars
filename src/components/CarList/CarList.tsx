@@ -3,18 +3,18 @@ import Typography from '@material-ui/core/Typography';
 import Pagination from '@material-ui/lab/Pagination';
 
 import CarsList from '../shared/CarsList';
-import { useContextState, useContextDispatch } from '../Context';
+import { useContextState } from '../StateProvider';
 import { fetchCarsWithFilters } from '../../services/filterService';
 import { CarInterface } from '../../interfaces/CarInterface';
 
 const CarList: React.FC = () => {
+    const [state, dispatch] = useContextState();
     const {
         filters,
         cars,
         totalCarsCount: total,
         totalPageCount: pages,
-    } = useContextState();
-    const dispatch = useContextDispatch();
+    } = state;
 
     const gotoPage = (e: any, value: number) => {
         dispatch({

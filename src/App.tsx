@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 
-import ContextProvider from './components/Context';
+import StateProvider from './components/StateProvider';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Fallback from './components/Fallback';
@@ -17,14 +17,14 @@ const App: React.FC = () => (
     <ThemeProvider theme={theme}>
         <Suspense fallback={<Fallback />}>
             <Header />
-            <ContextProvider>
+            <StateProvider>
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/car/fav" exact component={FavCars} />
                     <Route path="/car/:stockId(\d+)" exact component={CarDetails} />
                     <Route component={NotFound} />
                 </Switch>
-            </ContextProvider>
+            </StateProvider>
             <Footer />
         </Suspense>
     </ThemeProvider>

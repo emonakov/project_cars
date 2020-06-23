@@ -4,7 +4,7 @@ import ContainerUnstyled from '@material-ui/core/Container';
 
 import FilterElement from '../shared/FilterElement';
 import OrangeButton from '../shared/OrangeButton';
-import { useContextState, useContextDispatch } from '../Context';
+import { useContextState } from '../StateProvider';
 import { fetchFilters } from '../../services/filterService';
 
 const Container = styled(ContainerUnstyled)`
@@ -20,8 +20,8 @@ const Container = styled(ContainerUnstyled)`
 `;
 
 const Filter: React.FC = () => {
-    const { manufacturers, colors, filters } = useContextState();
-    const dispatch = useContextDispatch();
+    const [state, dispatch] = useContextState();
+    const { manufacturers, colors, filters } = state;
     const [localFilter, setLocalFilter] = useState({
         manufacturer: '',
         color: '',
