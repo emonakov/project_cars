@@ -1,12 +1,12 @@
 export interface CarInterface {
-    stockNumber: string;
+    stockNumber: number | string;
     manufacturerName: string;
     modelName: string;
     color: string;
     mileage: {
-        number: number;
+        number: number | string;
         unit: string;
-    };
+    }
     fuelType: string;
     pictureUrl: string;
 }

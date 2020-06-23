@@ -15,6 +15,9 @@ interface FormElementProps {
     defaultValue: string | number;
     onChange: Function;
     values: any[];
+    inputProps: {
+        [key: string]: any;
+    }
 }
 
 const FilterElement: React.FC<FormElementProps> = ({
@@ -23,12 +26,14 @@ const FilterElement: React.FC<FormElementProps> = ({
     defaultValue,
     onChange,
     values,
+    inputProps,
 }) => (
     <FormControl variant="filled">
         <InputLabel>{title}</InputLabel>
         <Select
             value={defaultValue}
             onChange={(e: any) => onChange(type, e.target.value)}
+            inputProps={inputProps}
         >
             <MenuItem value="">
                 <em>None</em>

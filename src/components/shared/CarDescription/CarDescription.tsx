@@ -46,7 +46,7 @@ const CarDescription: React.FC<CarDescriptionProps> = ({
             <Capitalized>{` - ${car.fuelType} - ${car.color}`}</Capitalized>
             {showLink && (
                 <CardActions>
-                    <LinkTo to={`/car/${car.stockNumber}`}>View details</LinkTo>
+                    <LinkTo to={`/car/${car.stockNumber}`} data-testid={`car-${car.stockNumber}`}>View details</LinkTo>
                 </CardActions>
             )}
         </Typography>

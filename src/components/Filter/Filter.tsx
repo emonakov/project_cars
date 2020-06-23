@@ -61,6 +61,9 @@ const Filter: React.FC = () => {
                     defaultValue={localFilter.manufacturer}
                     onChange={updateLocalFilter}
                     values={manufacturers.map(({ name }) => name)}
+                    inputProps={{
+                        'data-testid': 'manufacturers',
+                    }}
                 />
             )}
             {colors && (
@@ -70,6 +73,9 @@ const Filter: React.FC = () => {
                     defaultValue={localFilter.color}
                     onChange={updateLocalFilter}
                     values={colors}
+                    inputProps={{
+                        'data-testid': 'colors',
+                    }}
                 />
             )}
             <FilterElement
@@ -81,8 +87,16 @@ const Filter: React.FC = () => {
                     ['Mileage - Ascending', 'asc'],
                     ['Mileage - Descending', 'des'],
                 ]}
+                inputProps={{
+                    'data-testid': 'sort',
+                }}
             />
-            <OrangeButton variant="contained" color="primary" onClick={updateFilter}>
+            <OrangeButton
+                variant="contained"
+                color="primary"
+                onClick={updateFilter}
+                data-testid="filter"
+            >
                 Filter
             </OrangeButton>
         </Container>

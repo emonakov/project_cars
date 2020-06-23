@@ -69,6 +69,9 @@ const Car: React.FC = () => {
 
     useEffect(() => {
         if (error) {
+            // just to test error boundary element
+            // almost useless in the jest environment
+            // and creates a lot of noise
             throw error;
         }
     }, [error]);
@@ -100,6 +103,7 @@ const Car: React.FC = () => {
                             variant="contained"
                             color="primary"
                             onClick={favCar}
+                            data-testid="fav-button"
                         >
                             {savedFav ? 'Remove' : 'Save'}
                         </OrangeButton>

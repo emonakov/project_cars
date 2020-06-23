@@ -1,0 +1,218 @@
+{
+    "Audi": {
+        "cars": [
+            {
+                "stockNumber": 80765,
+                "manufacturerName": "Audi",
+                "modelName": "R8",
+                "color": "white",
+                "mileage": {
+                    "number": 176817,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 84975,
+                "manufacturerName": "Audi",
+                "modelName": "S5",
+                "color": "white",
+                "mileage": {
+                    "number": 156598,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 34207,
+                "manufacturerName": "Audi",
+                "modelName": "A6 Allroad",
+                "color": "white",
+                "mileage": {
+                    "number": 155503,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 21741,
+                "manufacturerName": "Audi",
+                "modelName": "R8",
+                "color": "white",
+                "mileage": {
+                    "number": 153663,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 92734,
+                "manufacturerName": "Audi",
+                "modelName": "A2",
+                "color": "white",
+                "mileage": {
+                    "number": 150467,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 58470,
+                "manufacturerName": "Audi",
+                "modelName": "RS 4",
+                "color": "white",
+                "mileage": {
+                    "number": 135073,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 76275,
+                "manufacturerName": "Audi",
+                "modelName": "A8",
+                "color": "white",
+                "mileage": {
+                    "number": 115779,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            }
+        ],
+        "totalPageCount": 1,
+        "totalCarsCount": 7
+    },
+    "BMW": {
+        "cars": [
+            {
+                "stockNumber": 66926,
+                "manufacturerName": "BMW",
+                "modelName": "Z1",
+                "color": "white",
+                "mileage": {
+                    "number": 188218,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 65365,
+                "manufacturerName": "BMW",
+                "modelName": "i3",
+                "color": "white",
+                "mileage": {
+                    "number": 186866,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 84782,
+                "manufacturerName": "BMW",
+                "modelName": "Z8",
+                "color": "white",
+                "mileage": {
+                    "number": 186133,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 69777,
+                "manufacturerName": "BMW",
+                "modelName": "X4",
+                "color": "white",
+                "mileage": {
+                    "number": 183298,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 92599,
+                "manufacturerName": "BMW",
+                "modelName": "4er",
+                "color": "white",
+                "mileage": {
+                    "number": 178989,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 86941,
+                "manufacturerName": "BMW",
+                "modelName": "X3",
+                "color": "white",
+                "mileage": {
+                    "number": 167572,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 35922,
+                "manufacturerName": "BMW",
+                "modelName": "X5",
+                "color": "white",
+                "mileage": {
+                    "number": 166335,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 30029,
+                "manufacturerName": "BMW",
+                "modelName": "i8",
+                "color": "white",
+                "mileage": {
+                    "number": 156470,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 28283,
+                "manufacturerName": "BMW",
+                "modelName": "1er",
+                "color": "white",
+                "mileage": {
+                    "number": 156260,
+                    "unit": "km"
+                },
+                "fuelType": "Diesel",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            },
+            {
+                "stockNumber": 85612,
+                "manufacturerName": "BMW",
+                "modelName": "X3",
+                "color": "white",
+                "mileage": {
+                    "number": 153007,
+                    "unit": "km"
+                },
+                "fuelType": "Petrol",
+                "pictureUrl": "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg"
+            }
+        ],
+        "totalPageCount": 2,
+        "totalCarsCount": 19
+    }
+}

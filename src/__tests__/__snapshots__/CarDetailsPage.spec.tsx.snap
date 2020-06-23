@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests CarDetails page Renders the initial page and navigates to the car view page 1`] = `
+<div>
+  <header
+    style=""
+  >
+    <div
+      class="MuiContainer-root sc-AxjAm sc-AxheI kTVrpe MuiContainer-maxWidthLg"
+    >
+      <div
+        class="MuiGrid-root sc-AxiKw bBNIh MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-4"
+        >
+          <h1
+            class="MuiTypography-root sc-AxhUy gpIutg MuiTypography-h1"
+          >
+            <a
+              aria-current="page"
+              class="sc-AxirZ iLjBBz sc-AxhCb sc-AxgMl kETrBh active"
+              href="/"
+            >
+              Car Sales
+            </a>
+          </h1>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-4"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-justify-xs-flex-end"
+          >
+            <a
+              class="sc-AxirZ iLjBBz sc-AxhCb clXXet"
+              href="/car/fav"
+            >
+              Favorites
+            </a>
+            <a
+              aria-current="page"
+              class="sc-AxirZ iLjBBz sc-AxhCb clXXet active"
+              href="/"
+            >
+              My orders
+            </a>
+            <a
+              aria-current="page"
+              class="sc-AxirZ iLjBBz sc-AxhCb clXXet active"
+              href="/"
+            >
+              Sell
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div
+    class="MuiContainer-root sc-AxjAm sc-fznWqX eipsae MuiContainer-maxWidthLg"
+  >
+    <section
+      class="sc-fzoiQi kKCChg"
+    />
+  </div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg"
+  >
+    <section
+      class="sc-fzoXzr bYAKAE"
+    >
+      <div
+        class="MuiCardContent-root"
+      >
+        <h4
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom"
+        >
+          R8
+        </h4>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiTypography-displayBlock"
+        >
+          Stock # 80765
+          <span
+            class="sc-fzplWN beffhE"
+          >
+             - 176,817 km
+          </span>
+          <span
+            class="sc-fznyAO looylO"
+          >
+             - Petrol - white
+          </span>
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body2"
+        >
+          This car is currently available and can be delivered as soon as tomorrow morning. Please be aware that delivery times shown in this page are not definitive and may change due to bad weather conditions
+        </p>
+      </div>
+      <div
+        class="MuiCardContent-root sc-fzpjYC dWnwVz"
+      >
+        <section
+          class="sc-fznxsB iybvfE"
+        >
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+          >
+            If you like this car, click the button and save it in your collection of favorite items.
+          </span>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained sc-fzoLsD jtNKkn MuiButton-containedPrimary"
+            data-testid="fav-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Save
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </section>
+      </div>
+    </section>
+  </div>
+  <footer
+    class="sc-Axmtr jAtLrE"
+    style=""
+  >
+    ©    ¯\\_(ツ)_/¯    2020
+  </footer>
+</div>
+`;
