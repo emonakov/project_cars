@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import Container from '../../shared/FullPageContainer';
 import CarsList from '../../shared/CarsList';
 import { CarInterface } from '../../../interfaces/CarInterface';
-import { getFavCars } from '../../../utils/storage';
+import useFavorites from '../../../hooks/useFavorites';
 
 const FavPageWrapper = styled(Grid)`
     margin: 0;
@@ -15,10 +15,11 @@ const FavPageWrapper = styled(Grid)`
 
 const FavCars: React.FC = () => {
     const [cars, setCars] = useState<CarInterface[]>();
+    const { favCars } = useFavorites();
 
     useEffect(() => {
-        setCars(getFavCars());
-    }, []);
+        setCars(favCars);
+    }, [favCars]);
 
     return (
         <Container>

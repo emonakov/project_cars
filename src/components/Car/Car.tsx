@@ -9,7 +9,7 @@ import OrangeButton from '../shared/OrangeButton';
 
 import { fetchCar } from '../../services/carService';
 import { CarInterface } from '../../interfaces/CarInterface';
-import { saveFavCar, isFavCar, removeFavCar } from '../../utils/storage';
+import useFavorites from '../../hooks/useFavorites';
 
 const CarDetailsWrapper = styled.section`
     display: grid;
@@ -38,14 +38,19 @@ const Car: React.FC = () => {
     const [car, setCar] = useState<CarInterface>();
     const [error, setHasError] = useState<Error>();
     const [savedFav, setSavedFav] = useState<Boolean>();
+    const {
+        storeFavCar,
+        removeCarFromFav,
+        isFavCar,
+    } = useFavorites();
 
     const favCar = () => {
         if (car) {
             if (!savedFav) {
-                saveFavCar(car);
+                storeFavCar(car);
                 setSavedFav(true);
             } else {
-                removeFavCar(car);
+                removeCarFromFav(car);
                 setSavedFav(false);
             }
         }
@@ -65,7 +70,7 @@ const Car: React.FC = () => {
         if (car && isFavCar(car)) {
             setSavedFav(true);
         }
-    }, [car]);
+    }, [car, isFavCar]);
 
     useEffect(() => {
         if (error) {

@@ -3,7 +3,6 @@ import { wait } from '@testing-library/react';
 
 import App from '../App';
 import renderWithRouter from '../utils/renderWithRouter';
-import { isFavCar } from '../utils/storage';
 import cars from './__mock__/cars.mock.json';
 
 describe('Tests favorites page', () => {
@@ -23,7 +22,6 @@ describe('Tests favorites page', () => {
         const { getByText } = renderWithRouter(<App />, '/car/fav');
         await wait();
 
-        expect(isFavCar(cars.BMW.cars[0])).toBe(true);
         expect(getByText(`${cars.BMW.cars.length} cars in this list`)).toBeInTheDocument();
     });
 });
