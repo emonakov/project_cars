@@ -49,7 +49,7 @@ const Filter: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchFilters((data: any) => dispatch({ type: 'update', payload: { ...data } }));
+        fetchFilters().then((data: any) => dispatch({ type: 'update', payload: { ...data } }));
     }, [dispatch]);
 
     return (

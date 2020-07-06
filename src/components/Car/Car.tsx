@@ -57,13 +57,7 @@ const Car: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchCar((carDetails: CarInterface, err: Error) => {
-            if (err) {
-                setHasError(err);
-            } else {
-                setCar(carDetails);
-            }
-        }, stockId);
+        fetchCar(stockId).then(setCar).catch(setHasError);
     }, [stockId]);
 
     useEffect(() => {
