@@ -77,7 +77,7 @@ const Car: React.FC = () => {
 
     return car
         ? (
-            <CarDetailsWrapper>
+            <CarDetailsWrapper data-testid="car-details">
                 <CardContent>
                     <CarDescription
                         car={car}

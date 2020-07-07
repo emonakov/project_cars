@@ -1,5 +1,6 @@
 import React from 'react';
-import { wait, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 import { fetchCarsWithFilters } from '../services/filterService';
@@ -10,7 +11,7 @@ import cars from './__mock__/cars.mock.json';
 jest.mock('../services/filterService');
 jest.mock('../services/carService');
 
-describe('Tests CarDetails page', () => {
+describe('CarDetails', () => {
     beforeEach(() => {
         (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
             callback(cars.Audi);
@@ -26,54 +27,50 @@ describe('Tests CarDetails page', () => {
         window.localStorage.clear();
     });
 
-    it('Renders the initial page and navigates to the car view page', async () => {
-        const { container, getByText, getByTestId } = renderWithRouter(<App />);
-        await wait();
+    it('renders the initial page and navigates to the car view page', async () => {
+        renderWithRouter(<App />);
+        const carLink = await screen.findByTestId('car-80765');
 
-        const carLink = getByTestId('car-80765');
-        fireEvent.click(carLink);
-        await wait();
+        userEvent.click(carLink);
 
-        expect(getByText(/80765/)).toBeInTheDocument();
-        expect(getByTestId('fav-button')).toBeInTheDocument();
-        expect(container).toMatchSnapshot();
+        await screen.findByText(/80765/);
+
+        expect(screen.getByTestId('fav-button')).toBeInTheDocument();
+        expect(screen.getByTestId('car-details')).toMatchSnapshot();
     });
 
-    it('Should save the car in the local storage', () => {
-        const { getByTestId } = renderWithRouter(<App />, '/car/80765');
-        const favButton = getByTestId('fav-button');
+    it('should save the car in the local storage', () => {
+        renderWithRouter(<App />, '/car/80765');
 
-        fireEvent.click(favButton);
-        expect(favButton).toHaveTextContent(/remove/i);
+        userEvent.click(screen.getByTestId('fav-button'));
+        expect(screen.getByTestId('fav-button')).toHaveTextContent(/remove/i);
         expect(localStorage.getItem('favCars')).not.toBeNull();
         expect(localStorage.getItem('favCars')).not.toBe('[]');
     });
 
-    it('Should remove the car from the local storage', () => {
-        const { getByTestId } = renderWithRouter(<App />, '/car/80765');
-        const favButton = getByTestId('fav-button');
+    it('should remove the car from the local storage', () => {
+        renderWithRouter(<App />, '/car/80765');
 
-        fireEvent.click(favButton);
-        fireEvent.click(favButton);
+        userEvent.click(screen.getByTestId('fav-button'));
+        userEvent.click(screen.getByTestId('fav-button'));
         expect(localStorage.getItem('favCars')).toBe('[]');
     });
 
-    it('Should show remove button if the car is in the local storage', () => {
+    it('should show remove button if the car is in the local storage', () => {
         window.localStorage.setItem('favCars', JSON.stringify([cars.Audi.cars[0]]));
-        const { getByTestId } = renderWithRouter(<App />, '/car/80765');
-        const favButton = getByTestId('fav-button');
+        renderWithRouter(<App />, '/car/80765');
 
-        expect(favButton).toHaveTextContent(/remove/i);
+        expect(screen.getByTestId('fav-button')).toHaveTextContent(/remove/i);
     });
 
-    it('Throws the error if something happened in the service ', async () => {
+    it('throws the error if something happened in the service ', async () => {
         (fetchCar as jest.Mock).mockImplementation((callback: Function) => {
             callback(null, new Error('something went wrong'));
         });
 
-        const { getByText } = renderWithRouter(<App />, '/car/80765');
-        await wait();
+        renderWithRouter(<App />, '/car/80765');
 
-        expect(getByText(/something went wrong/i)).toBeInTheDocument();
+        const errorMessage = await screen.findByText(/something went wrong/i);
+        expect(errorMessage).toMatchSnapshot();
     });
 });

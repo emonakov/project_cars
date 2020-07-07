@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests favorites page Renders the favorites page with cars in the local storage 1`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom"
+>
+  10 cars in this list
+</p>
+`;
+
+exports[`Tests favorites page Renders the favorites page without cars in the local storage 1`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom"
+>
+  0 cars in this list
+</p>
+`;

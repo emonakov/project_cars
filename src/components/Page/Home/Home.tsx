@@ -17,7 +17,7 @@ const Home: React.FC = () => (
             <Grid item xs={4}>
                 <Filter />
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={7} data-testid="car-list">
                 <CarList />
             </Grid>
         </HomePageWrapper>
