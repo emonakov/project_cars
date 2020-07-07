@@ -13,13 +13,9 @@ jest.mock('../services/filterService');
 
 describe('Homepage', () => {
     beforeEach(() => {
-        (fetchFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback({ manufacturers, colors });
-        });
+        (fetchFilters as jest.Mock).mockImplementation(() => Promise.resolve({ manufacturers, colors }));
 
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback(cars.Audi);
-        });
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve(cars.Audi));
     });
 
     afterEach(() => {
@@ -41,9 +37,7 @@ describe('Homepage', () => {
 
     it('renders the page and changes the filter values', async () => {
         renderWithRouter(<App />);
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback(cars.BMW);
-        });
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve(cars.BMW));
 
         await screen.findByTestId('manufacturers');
         userEvent.type(screen.getByTestId('manufacturers'), 'BMW');
@@ -58,9 +52,7 @@ describe('Homepage', () => {
     });
 
     it('does not render car list if it is empty', async () => {
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback({});
-        });
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve({}));
 
         renderWithRouter(<App />);
 

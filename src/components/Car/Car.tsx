@@ -36,7 +36,7 @@ const FavWrapper = styled.section`
 const Car: React.FC = () => {
     const { stockId } = useParams<{stockId: string}>();
     const [car, setCar] = useState<CarInterface>();
-    const [error, setHasError] = useState<Error>();
+    const [error, setError] = useState<Error>();
     const [savedFav, setSavedFav] = useState<Boolean>();
     const {
         storeFavCar,
@@ -57,7 +57,9 @@ const Car: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchCar(stockId).then(setCar).catch(setHasError);
+        fetchCar(stockId)
+            .then(setCar)
+            .catch(setError);
     }, [stockId]);
 
     useEffect(() => {
