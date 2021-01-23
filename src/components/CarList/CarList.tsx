@@ -29,8 +29,8 @@ const CarList: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchCarsWithFilters(
-            ({ cars: newCars, totalCarsCount, totalPageCount }: {
+        fetchCarsWithFilters(Object.keys(filters).map((key: string) => [key, filters[key]]))
+            .then(({ cars: newCars, totalCarsCount, totalPageCount }: {
                 cars: CarInterface[],
                 totalCarsCount: number,
                 totalPageCount: number,
@@ -41,9 +41,7 @@ const CarList: React.FC = () => {
                     totalCarsCount,
                     totalPageCount,
                 },
-            }),
-            Object.keys(filters).map((key: string) => [key, filters[key]]),
-        );
+            }));
     }, [dispatch, filters]);
 
     return (

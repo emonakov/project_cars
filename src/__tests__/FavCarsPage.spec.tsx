@@ -1,5 +1,5 @@
 import React from 'react';
-import { wait } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import App from '../App';
 import renderWithRouter from '../utils/renderWithRouter';
@@ -11,17 +11,17 @@ describe('Tests favorites page', () => {
     });
 
     it('Renders the favorites page without cars in the local storage', async () => {
-        const { getByText } = renderWithRouter(<App />, '/car/fav');
-        await wait();
+        renderWithRouter(<App />, '/car/fav');
 
-        expect(getByText(/0 cars in this list/i)).toBeInTheDocument();
+        const carsCounter = await screen.findByText(/0 cars in this list/i);
+        expect(carsCounter).toMatchSnapshot();
     });
 
     it('Renders the favorites page with cars in the local storage', async () => {
         window.localStorage.setItem('favCars', JSON.stringify([...cars.BMW.cars]));
-        const { getByText } = renderWithRouter(<App />, '/car/fav');
-        await wait();
+        renderWithRouter(<App />, '/car/fav');
+        const carsCounter = await screen.findByText(`${cars.BMW.cars.length} cars in this list`);
 
-        expect(getByText(`${cars.BMW.cars.length} cars in this list`)).toBeInTheDocument();
+        expect(carsCounter).toMatchSnapshot();
     });
 });

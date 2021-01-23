@@ -1,24 +1,23 @@
 import React from 'react';
-import { wait, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import App from '../App';
-import { fetchCarsWithFilters } from '../services/filterService';
+import { fetchCarsWithFilters, fetchFilters } from '../services/filterService';
 import { fetchCar } from '../services/carService';
 import renderWithRouter from '../utils/renderWithRouter';
 import cars from './__mock__/cars.mock.json';
+import { manufacturers } from './__mock__/manufacturers.mock.json';
+import { colors } from './__mock__/colors.mock.json';
 
 jest.mock('../services/filterService');
 jest.mock('../services/carService');
 
-describe('Tests CarDetails page', () => {
+describe('CarDetails', () => {
     beforeEach(() => {
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback(cars.Audi);
-        });
-
-        (fetchCar as jest.Mock).mockImplementation((callback: Function) => {
-            callback(cars.Audi.cars[0]);
-        });
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve(cars.Audi));
+        (fetchFilters as jest.Mock).mockImplementation(() => Promise.resolve({ manufacturers, colors }));
+        (fetchCar as jest.Mock).mockImplementation(() => Promise.resolve(cars.Audi.cars[0]));
     });
 
     afterEach(() => {
@@ -26,54 +25,50 @@ describe('Tests CarDetails page', () => {
         window.localStorage.clear();
     });
 
-    it('Renders the initial page and navigates to the car view page', async () => {
-        const { container, getByText, getByTestId } = renderWithRouter(<App />);
-        await wait();
+    it('renders the initial page and navigates to the car view page', async () => {
+        renderWithRouter(<App />);
+        const carLink = await screen.findByTestId('car-80765');
 
-        const carLink = getByTestId('car-80765');
-        fireEvent.click(carLink);
-        await wait();
+        userEvent.click(carLink);
 
-        expect(getByText(/80765/)).toBeInTheDocument();
-        expect(getByTestId('fav-button')).toBeInTheDocument();
-        expect(container).toMatchSnapshot();
+        await screen.findByText(/80765/);
+
+        expect(screen.getByTestId('fav-button')).toBeInTheDocument();
+        expect(screen.getByTestId('car-details')).toMatchSnapshot();
     });
 
-    it('Should save the car in the local storage', () => {
-        const { getByTestId } = renderWithRouter(<App />, '/car/80765');
-        const favButton = getByTestId('fav-button');
+    it('should save the car in the local storage', async () => {
+        renderWithRouter(<App />, '/car/80765');
 
-        fireEvent.click(favButton);
-        expect(favButton).toHaveTextContent(/remove/i);
+        const favButton = await screen.findByTestId('fav-button');
+        userEvent.click(favButton);
+        expect(screen.getByTestId('fav-button')).toHaveTextContent(/remove/i);
         expect(localStorage.getItem('favCars')).not.toBeNull();
         expect(localStorage.getItem('favCars')).not.toBe('[]');
     });
 
-    it('Should remove the car from the local storage', () => {
-        const { getByTestId } = renderWithRouter(<App />, '/car/80765');
-        const favButton = getByTestId('fav-button');
-
-        fireEvent.click(favButton);
-        fireEvent.click(favButton);
+    it('should remove the car from the local storage', async () => {
+        renderWithRouter(<App />, '/car/80765');
+        const favButton = await screen.findByTestId('fav-button');
+        userEvent.click(favButton);
+        userEvent.click(favButton);
         expect(localStorage.getItem('favCars')).toBe('[]');
     });
 
-    it('Should show remove button if the car is in the local storage', () => {
+    it('should show remove button if the car is in the local storage', async () => {
         window.localStorage.setItem('favCars', JSON.stringify([cars.Audi.cars[0]]));
-        const { getByTestId } = renderWithRouter(<App />, '/car/80765');
-        const favButton = getByTestId('fav-button');
+        renderWithRouter(<App />, '/car/80765');
+        const favButton = await screen.findByTestId('fav-button');
 
         expect(favButton).toHaveTextContent(/remove/i);
     });
 
-    it('Throws the error if something happened in the service ', async () => {
-        (fetchCar as jest.Mock).mockImplementation((callback: Function) => {
-            callback(null, new Error('something went wrong'));
-        });
+    it('throws the error if something happened in the service ', async () => {
+        (fetchCar as jest.Mock).mockImplementation(() => '');
 
-        const { getByText } = renderWithRouter(<App />, '/car/80765');
-        await wait();
+        renderWithRouter(<App />, '/car/80765');
 
-        expect(getByText(/something went wrong/i)).toBeInTheDocument();
+        const errorMessage = await screen.findByText(/something went wrong/i);
+        expect(errorMessage).toMatchSnapshot();
     });
 });

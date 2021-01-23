@@ -1,5 +1,6 @@
 import React from 'react';
-import { wait, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 import { fetchFilters, fetchCarsWithFilters } from '../services/filterService';
@@ -10,68 +11,52 @@ import cars from './__mock__/cars.mock.json';
 
 jest.mock('../services/filterService');
 
-describe('Tests homepage', () => {
+describe('Homepage', () => {
     beforeEach(() => {
-        (fetchFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback({ manufacturers, colors });
-        });
+        (fetchFilters as jest.Mock).mockImplementation(() => Promise.resolve({ manufacturers, colors }));
 
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback(cars.Audi);
-        });
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve(cars.Audi));
     });
 
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    it('Renders the initial page', () => {
-        const { getByText } = renderWithRouter(<App />);
-        const linkElement = getByText(/car sales/i);
-        expect(linkElement).toBeInTheDocument();
+    it('renders the initial page', () => {
+        renderWithRouter(<App />);
+        expect(screen.getByText(/car sales/i)).toBeInTheDocument();
     });
 
-    it('Renders homepage and waits for all the elements', async () => {
-        const { container, getByTestId } = renderWithRouter(<App />);
-        await wait();
+    it('renders homepage and waits for all the elements', async () => {
+        renderWithRouter(<App />);
 
-        const manufacturersFilter = getByTestId('manufacturers');
-        const colorsFilter = getByTestId('colors');
-        expect(manufacturersFilter).toBeInTheDocument();
-        expect(colorsFilter).toBeInTheDocument();
-        expect(container).toMatchSnapshot();
+        await screen.findByTestId('manufacturers');
+        expect(screen.getByTestId('manufacturers')).toBeInTheDocument();
+        expect(screen.getByTestId('colors')).toBeInTheDocument();
     });
 
-    it('Renders the page and changes the filter values', async () => {
-        const { container, getByTestId, getByText } = renderWithRouter(<App />);
-        await wait();
+    it('renders the page and changes the filter values', async () => {
+        renderWithRouter(<App />);
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve(cars.BMW));
 
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback(cars.BMW);
-        });
-        const manufacturersFilter = getByTestId('manufacturers');
-        const colorsFilters = getByTestId('colors');
-        const filterCta = getByTestId('filter');
+        await screen.findByTestId('manufacturers');
+        userEvent.type(screen.getByTestId('manufacturers'), 'BMW');
+        userEvent.type(screen.getByTestId('colors'), 'white');
+        userEvent.click(screen.getByTestId('filter'));
 
-        fireEvent.change(manufacturersFilter, { target: { value: 'BMW' } });
-        fireEvent.change(colorsFilters, { target: { value: 'white' } });
-        fireEvent.click(filterCta);
-        await wait();
-
-        expect(getByText(/66926/)).toBeInTheDocument();
-        expect(getByText(/65365/)).toBeInTheDocument();
-
-        expect(container).toMatchSnapshot();
+        await screen.findByText(/66926/);
+        expect(screen.getByText(/66926/)).toBeInTheDocument();
+        expect(screen.getByText(/65365/)).toBeInTheDocument();
+        expect(screen.getByText(/65365/)).toMatchSnapshot();
+        expect(screen.getByText(/66926/)).toMatchSnapshot();
     });
 
-    it('Does not render car list if it is empty', async () => {
-        (fetchCarsWithFilters as jest.Mock).mockImplementation((callback: Function) => {
-            callback({});
-        });
+    it('does not render car list if it is empty', async () => {
+        (fetchCarsWithFilters as jest.Mock).mockImplementation(() => Promise.resolve({}));
 
-        const { container } = renderWithRouter(<App />);
-        await wait();
+        renderWithRouter(<App />);
 
-        expect(container).toMatchSnapshot();
+        await screen.findByTestId('car-list');
+        expect(screen.getByTestId('car-list')).toBeEmpty();
     });
 });
